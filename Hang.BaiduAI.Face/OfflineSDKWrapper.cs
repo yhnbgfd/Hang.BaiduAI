@@ -11,8 +11,8 @@ namespace Hang.BaiduAI.Face
         /// 获取设备指纹
         /// </summary>
         /// <returns></returns>
-        [DllImport(dll, EntryPoint = "get_device_id")]
-        public static extern IntPtr get_device_id();
+        [DllImport(dll, EntryPoint = "get_device_id", CallingConvention = CallingConvention.StdCall)]
+        public static extern string get_device_id();
         /// <summary>
         /// 人脸对比接口（本接口中的image_type为1表示base64图片编码，为2表示文件路径，为3表示face_token）
         /// </summary>
