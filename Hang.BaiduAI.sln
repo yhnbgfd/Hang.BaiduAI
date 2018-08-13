@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2047
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hang.BaiduAI.Face", "Hang.BaiduAI.Face\Hang.BaiduAI.Face.csproj", "{4674D8B6-34A4-4ACC-AEC8-5B3231A4A715}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4674D8B6-34A4-4ACC-AEC8-5B3231A4A715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4674D8B6-34A4-4ACC-AEC8-5B3231A4A715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4674D8B6-34A4-4ACC-AEC8-5B3231A4A715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4674D8B6-34A4-4ACC-AEC8-5B3231A4A715}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41439ED9-4370-4C74-B045-EB19F84E16EB}
+	EndGlobalSection
+EndGlobal
