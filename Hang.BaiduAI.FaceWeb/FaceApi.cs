@@ -1,4 +1,5 @@
 ﻿using Baidu.Aip.Face;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Hang.BaiduAI.FaceWeb
             };
         }
 
-        public JObject Detect(string imageBase64)
+        public DetectResult Detect(string imageBase64)
         {
             var imageType = "BASE64";
 
@@ -31,10 +32,11 @@ namespace Hang.BaiduAI.FaceWeb
             };
 
             // 带参数调用人脸检测
-            return face.Detect(imageBase64, imageType, options);
+            var jsonRet = face.Detect(imageBase64, imageType, options);
+            return JsonConvert.DeserializeObject<DetectResult>(jsonRet.ToString());
         }
 
-        public JObject Match(string cameraImageBase64, string idCardImageBase64)
+        public MatchResult Match(string cameraImageBase64, string idCardImageBase64)
         {
             var faces = new JArray
             {
@@ -56,7 +58,8 @@ namespace Hang.BaiduAI.FaceWeb
                 }
             };
 
-            return face.Match(faces);
+            var jsonRet = face.Match(faces);
+            return JsonConvert.DeserializeObject<MatchResult>(jsonRet.ToString());
         }
 
         public string ReadImg(string img)

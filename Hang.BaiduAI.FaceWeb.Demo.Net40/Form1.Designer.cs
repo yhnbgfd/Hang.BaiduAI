@@ -122,6 +122,7 @@
             this.textBox_log.Multiline = true;
             this.textBox_log.Name = "textBox_log";
             this.textBox_log.ReadOnly = true;
+            this.textBox_log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_log.Size = new System.Drawing.Size(227, 294);
             this.textBox_log.TabIndex = 17;
             this.textBox_log.WordWrap = false;
