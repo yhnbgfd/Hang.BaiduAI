@@ -1,12 +1,8 @@
 ﻿using AForge.Video.DirectShow;
+using Hang.BaiduAI.FaceWeb.Demo.Net40.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +20,10 @@ namespace Hang.BaiduAI.FaceWeb.Demo.Net40
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.textBox_apiKey.Text = Settings.Default.apiKey;
+            this.textBox_secretKey.Text = Settings.Default.secretKey;
+            this.textBox_idCardPath.Text = Settings.Default.idCardPath;
+
             var videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (videoDevices.Count == 0)//没有检测到摄像头
             {
@@ -37,13 +37,15 @@ namespace Hang.BaiduAI.FaceWeb.Demo.Net40
             this.VideoPlayer.Start();
         }
 
-        private void button_Start_Click(object sender, EventArgs e)
+        private void Button_Start_Click(object sender, EventArgs e)
         {
-            var apiKey = this.textBox_apiKey.Text.Trim();
-            var secretKey = this.textBox_secretKey.Text.Trim();
+            Settings.Default.apiKey = this.textBox_apiKey.Text.Trim();
+            Settings.Default.secretKey = this.textBox_secretKey.Text.Trim();
+            Settings.Default.idCardPath = this.textBox_idCardPath.Text.Trim();
+            Settings.Default.Save();
 
             FaceApi faceApi = new FaceApi();
-            faceApi.Init(apiKey, secretKey);
+            faceApi.Init(Settings.Default.apiKey, Settings.Default.secretKey);
 
             // 定时截屏比对
             Task.Factory.StartNew(() =>
@@ -60,7 +62,7 @@ namespace Hang.BaiduAI.FaceWeb.Demo.Net40
                         {
                             var image1 = Convert.ToBase64String((byte[])new ImageConverter().ConvertTo(img, typeof(byte[])));
                             img.Dispose();
-                            var image2 = Convert.ToBase64String(File.ReadAllBytes(this.textBox_idCardPath.Text.Trim()));
+                            var image2 = Convert.ToBase64String(File.ReadAllBytes(Settings.Default.idCardPath));
 
                             var result1 = faceApi.Detect(image1);
                             var result2 = faceApi.Match(image1, image2);
@@ -75,6 +77,22 @@ namespace Hang.BaiduAI.FaceWeb.Demo.Net40
                     }
                 }
             }, _cts.Token);
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _cts.Cancel();
+
+            if (this.VideoPlayer.IsRunning)
+            {
+                this.VideoPlayer.Stop();
+            }
+            this.VideoPlayer.Dispose();
+        }
+
+        private void VideoPlayer_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
