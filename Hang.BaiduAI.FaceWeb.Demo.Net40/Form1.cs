@@ -72,19 +72,20 @@ namespace Hang.BaiduAI.FaceWeb.Demo.Net40
                             if (_detectResult.error_code == 0)
                             {
                                 BeginInvoke(li, new object[] { $"人脸数量：{_detectResult.result.face_num}" });
+
+                                var result2 = faceApi.Match(image1, image2);
+                                if (result2.error_code == 0)
+                                {
+                                    BeginInvoke(li, new object[] { $"比对分数：{result2.result.score}" });
+                                }
+                                else
+                                {
+                                    BeginInvoke(li, new object[] { $"比对分数：{result2.error_msg}" });
+                                }
                             }
                             else
                             {
                                 BeginInvoke(li, new object[] { $"人脸数量：{_detectResult.error_msg}" });
-                            }
-                            var result2 = faceApi.Match(image1, image2);
-                            if (result2.error_code == 0)
-                            {
-                                BeginInvoke(li, new object[] { $"比对分数：{result2.result.score}" });
-                            }
-                            else
-                            {
-                                BeginInvoke(li, new object[] { $"比对分数：{result2.error_msg}" });
                             }
                         }
                     }
