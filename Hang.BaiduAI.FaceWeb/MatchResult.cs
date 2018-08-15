@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hang.BaiduAI.FaceWeb
+﻿namespace Hang.BaiduAI.FaceWeb
 {
     public class MatchResult
     {
