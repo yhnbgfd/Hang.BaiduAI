@@ -74,10 +74,22 @@ namespace Hang.BaiduAI.Face
         [StructLayout(LayoutKind.Sequential)]
         public struct FaceInfo
         {
-            public int mWidth;
-            public int mAngle;
-            public int mCenter_y;
-            public int mCenter_x;
+            /// <summary>
+            /// rectangle width
+            /// </summary>
+            public float mWidth;
+            /// <summary>
+            /// rectangle tilt angle [-45 45] in degrees
+            /// </summary>
+            public float mAngle;
+            /// <summary>
+            /// rectangle center y
+            /// </summary>
+            public float mCenter_y;
+            /// <summary>
+            /// rectangle center x
+            /// </summary>
+            public float mCenter_x;
             public float mConf;
         }
     }
