@@ -9,11 +9,11 @@ namespace Hang.BaiduAI.FaceWeb
 {
     public class FaceApi
     {
-        private Face face;
+        private Face _face;
 
         public void Init(string apiKey, string secretKey)
         {
-            face = new Face(apiKey, secretKey)
+            _face = new Face(apiKey, secretKey)
             {
                 Timeout = 5000,// 修改超时时间
             };
@@ -21,8 +21,6 @@ namespace Hang.BaiduAI.FaceWeb
 
         public DetectResult Detect(string imageBase64)
         {
-            var imageType = "BASE64";
-
             // 如果有可选参数
             var options = new Dictionary<string, object>
             {
@@ -32,7 +30,8 @@ namespace Hang.BaiduAI.FaceWeb
             };
 
             // 带参数调用人脸检测
-            var jsonRet = face.Detect(imageBase64, imageType, options);
+            var imageType = "BASE64";
+            var jsonRet = _face.Detect(imageBase64, imageType, options);
             return JsonConvert.DeserializeObject<DetectResult>(jsonRet.ToString());
         }
 
@@ -52,13 +51,13 @@ namespace Hang.BaiduAI.FaceWeb
                 {
                     {"image", idCardImageBase64},
                     {"image_type", "BASE64"},
-                    {"face_type", "LIVE"},
+                    {"face_type", "IDCARD"},
                     {"quality_control", "LOW"},
                     {"liveness_control", "NONE"},
                 }
             };
 
-            var jsonRet = face.Match(faces);
+            var jsonRet = _face.Match(faces);
             return JsonConvert.DeserializeObject<MatchResult>(jsonRet.ToString());
         }
 
@@ -66,7 +65,6 @@ namespace Hang.BaiduAI.FaceWeb
         {
             return Convert.ToBase64String(File.ReadAllBytes(img));
         }
-
 
     }
 }

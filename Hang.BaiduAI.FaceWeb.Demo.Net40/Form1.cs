@@ -57,7 +57,9 @@ namespace Hang.BaiduAI.FaceWeb.Demo.Net40
                 while (true)
                 {
                     if (_cts.IsCancellationRequested)
+                    {
                         break;
+                    }
 
                     try
                     {
